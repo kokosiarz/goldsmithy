@@ -1,5 +1,7 @@
-import { GoldPrice } from './src/components/gold-price'
+import { GoldPrice } from './src/components/price-table'
+// import PriceGraph from './src/components/price-graph'
 import { StyleSheet, View } from 'react-native'
+import { Text } from 'react-native-paper'
 import {
   QueryClient,
   QueryClientProvider
@@ -11,9 +13,8 @@ export default function App () {
   return (
     <QueryClientProvider client={queryClient}>
       <View style={styles.container}>
-        <View>
+          {/* <PriceGraph /> */}
           <GoldPrice />
-        </View>
       </View>
     </QueryClientProvider>
   )
@@ -21,7 +22,11 @@ export default function App () {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
-    backgroundColor: '#fff'
+    padding: 10,
+    // paddingTop: 150,
+    height: '100%',
+    width: '100%',
+    backgroundColor: '#fff',
+    justifyContent: 'space-around'
   }
 })
