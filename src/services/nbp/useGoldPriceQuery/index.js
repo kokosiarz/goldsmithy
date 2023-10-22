@@ -10,6 +10,7 @@ export const useGoldPriceQuery = (params) => useQuery({
     axios
       .get(goldPriceApiUrl)
       .then((res) => res.data[0]),
+  staleTime: 1000 * 60 * 5,
   ...params
 })
 
@@ -29,6 +30,7 @@ export const useGoldPriceHistoryQuery = (params) => {
       axios
         .get(`${goldPriceApiUrl}/${formattedDateRange}`)
         .then((res) => res.data.map((item) => ({ value: item.cena, label: item.data }))),
+    staleTime: 1000 * 60 * 5,
     ...params
   })
 }

@@ -1,0 +1,5 @@
+Local storage handling -> AsyncStorage
+Settings storage/context
+Buffer requests data
+Sell/Buy Tabs
+Settings tab
