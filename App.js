@@ -1,6 +1,3 @@
-import { GoldPrice } from './src/components/price-table'
-import PriceGraph from './src/components/price-graph'
-// import { StyleSheet, KeyboardAvoidingView } from 'react-native'
 import {
   QueryClient
 } from '@tanstack/react-query'
@@ -9,6 +6,10 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister'
 import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import { GoldPrice } from './src/screens/price-table'
+import PriceGraph from './src/screens/price-graph'
+import Settings from './src/screens/settings'
+import content from './src/content'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,22 +33,11 @@ export default function App () {
     >
       <NavigationContainer>
         <Drawer.Navigator>
-          <Drawer.Screen name="Table" component={GoldPrice}/>
-          <Drawer.Screen name="Graph" component={PriceGraph}/>
-          {/* <KeyboardAvoidingView style={styles.container}>
-            <GoldPrice />
-          </KeyboardAvoidingView> */}
+          <Drawer.Screen name={content.screens.prices.name} component={GoldPrice}/>
+          <Drawer.Screen name={content.screens.graph.name} component={PriceGraph}/>
+          <Drawer.Screen name={content.screens.settings.name}component={Settings}/>
         </Drawer.Navigator>
       </NavigationContainer>
     </PersistQueryClientProvider>
   )
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     padding: 10,
-//     height: '100%',
-//     width: '100%',
-//     justifyContent: 'space-around'
-//   }
-// })

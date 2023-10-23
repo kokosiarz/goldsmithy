@@ -2,7 +2,10 @@ import { useState } from 'react'
 import NumericInput from 'react-native-numeric-input'
 import { View } from 'react-native'
 import { DataTable, Text } from 'react-native-paper'
-import useGoldPriceQuery from '../../services/nbp/useGoldPriceQuery'
+import { priceTable as content, common } from '../../content'
+import ScreenTitle from '../../components/screen-title'
+import ScreenWrapper from '../../components/screen-wrapper'
+import useGoldPriceQuery from '../../hooks/useGoldPriceQuery'
 import config from '../../configuration/config'
 import styles from './styles'
 
@@ -11,21 +14,22 @@ const [spreadLow, spreadHigh] = [config.defaults.spread.low, config.defaults.spr
 export const GoldPrice = () => {
   const [amount, setAmount] = useState(1)
   const { isPending, error, data } = useGoldPriceQuery()
-  return (data && <View style={styles.container}>
-        <Text variant="headlineLarge" style={{ padding: 10 }}>Au</Text>
+  return (<ScreenWrapper>
+    {data && <View>
+        <ScreenTitle text='Au'/>
         <DataTable>
           <DataTable.Header>
             <DataTable.Title>
-              PRÓBA
+              {content.caratage}
             </DataTable.Title>
             <DataTable.Title>
-              SKUP
+              {content.buy}
             </DataTable.Title>
             <DataTable.Title>
-              NBP
+              {content.nbp}
             </DataTable.Title>
             <DataTable.Title>
-              SPRZEDAŻ
+              {content.sell}
             </DataTable.Title>
           </DataTable.Header>
           {config.constants.caratages.map((caratage) => <DataTable.Row key={caratage.name}>
@@ -36,15 +40,16 @@ export const GoldPrice = () => {
           </DataTable.Row>)}
         </DataTable>
         <View style={styles.info}>
-          <Text variant="labelSmall">Dane pobrano: {data.data}</Text>
+          <Text variant="labelSmall">{content.date}: {data.data}</Text>
         </View>
         <View style={styles.inputSection}>
-          <Text style={styles.label}> Ile gramów:</Text>
+          <Text style={styles.label}> {content.amount}:</Text>
           <NumericInput onChange={value => setAmount(value)} valueType='real' totalHeight={42} minValue={0} initValue={amount} />
         </View>
-      {error && <Text>Problem w trakcie pobierania danych...</Text>}
-      {isPending && <Text>pobiram dane...</Text>}
-    </View>
+      </View>}
+      {error && <Text>{common.apiError}</Text>}
+      {isPending && <Text>{common.apiFetch}</Text>}
+    </ScreenWrapper>
   )
 }
 
