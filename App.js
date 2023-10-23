@@ -7,6 +7,7 @@ import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persi
 import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { GoldPrice } from './src/screens/price-table'
+import { SettingsProvider } from './src/contexts/settings'
 import PriceGraph from './src/screens/price-graph'
 import Settings from './src/screens/settings'
 import content from './src/content'
@@ -31,13 +32,15 @@ export default function App () {
       client={queryClient}
       persistOptions={{ persister: asyncStoragePersister }}
     >
-      <NavigationContainer>
-        <Drawer.Navigator>
-          <Drawer.Screen name={content.screens.prices.name} component={GoldPrice}/>
-          <Drawer.Screen name={content.screens.graph.name} component={PriceGraph}/>
-          <Drawer.Screen name={content.screens.settings.name}component={Settings}/>
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <SettingsProvider>
+        <NavigationContainer>
+          <Drawer.Navigator>
+            <Drawer.Screen name={content.screens.prices.name} component={GoldPrice}/>
+            <Drawer.Screen name={content.screens.graph.name} component={PriceGraph}/>
+            <Drawer.Screen name={content.screens.settings.name}component={Settings}/>
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </SettingsProvider>
     </PersistQueryClientProvider>
   )
 }
