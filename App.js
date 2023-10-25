@@ -1,5 +1,5 @@
 import {
-  QueryClient
+  QueryClient,
 } from '@tanstack/react-query'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
@@ -15,18 +15,18 @@ import content from './src/content'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      gcTime: 1000 * 60 * 60 * 24 // 24 hours
-    }
-  }
+      gcTime: 1000 * 60 * 60 * 24, // 24 hours
+    },
+  },
 })
 
 const asyncStoragePersister = createAsyncStoragePersister({
-  storage: AsyncStorage
+  storage: AsyncStorage,
 })
 
 const Drawer = createDrawerNavigator()
 
-export default function App () {
+export default function App() {
   return (
     <PersistQueryClientProvider
       client={queryClient}
@@ -35,9 +35,9 @@ export default function App () {
       <SettingsProvider>
         <NavigationContainer>
           <Drawer.Navigator>
-            <Drawer.Screen name={content.screens.prices.name} component={GoldPrice}/>
-            <Drawer.Screen name={content.screens.graph.name} component={PriceGraph}/>
-            <Drawer.Screen name={content.screens.settings.name}component={Settings}/>
+            <Drawer.Screen name={content.screens.prices.name} component={GoldPrice} />
+            <Drawer.Screen name={content.screens.graph.name} component={PriceGraph} />
+            <Drawer.Screen name={content.screens.settings.name} component={Settings} />
           </Drawer.Navigator>
         </NavigationContainer>
       </SettingsProvider>

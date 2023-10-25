@@ -16,8 +16,9 @@ const useSettings = () => {
   }, [])
 
   const updateSettings = async (newSettings) => {
-    await setStoreValue('settings', JSON.stringify(newSettings))
-    setSettings(newSettings)
+    const updatedSettings = { ...settings, ...newSettings }
+    await setStoreValue('settings', JSON.stringify(updatedSettings))
+    setSettings(updatedSettings)
   }
 
   return [settings, updateSettings]

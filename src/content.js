@@ -1,7 +1,7 @@
 const content = {
   common: {
     apiError: 'Błąd pobierania danych',
-    apiFetch: 'Pobieranie danych...'
+    apiFetch: 'Pobieranie danych...',
   },
   screens: {
     prices: {
@@ -12,18 +12,25 @@ const content = {
         nbp: 'NBP',
         sell: 'SPRZEDAŻ',
         date: 'Dane pobrano',
-        amount: 'Ile gramów'
-      }
+        amount: 'Ile gramów',
+      },
     },
     graph: {
-      name: 'Wykres'
+      name: 'Wykres',
     },
     settings: {
-      name: 'Ustawienia'
-    }
-  }
+      name: 'Ustawienia',
+      content: {
+        displayNominalPrice: 'Wyświetlaj cenę nominalną',
+        spreadLow: 'Marża skupu',
+        spreadHigh: 'Marża sprzedaży',
+        currency: 'Waluta',
+      },
+    },
+  },
 }
 
 export const common = content.common
 export const priceTable = content.screens.prices.content
+export const settings = content.screens.settings.content
 export default content
